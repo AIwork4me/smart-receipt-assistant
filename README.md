@@ -1,16 +1,3 @@
----
-title: 智能票据报销助手
-emoji: 🧾
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 4.44.0
-app_file: app.py
-pinned: false
-license: mit
-short_description: 基于 PaddleOCR-VL-1.5 + LangChain + ERINE 的票据识别系统，支持印章识别
----
-
 <div align="center">
 
 # 🧾 智能票据报销助手
