@@ -1,0 +1,31 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Environment
+.env
+
+# Testing
+.pytest_cache/
+
+# Build
+dist/
+build/
+
+# Project specific
+invoices/
+results/
+output/
+*.json
+*.xlsx
+*.csv
+
