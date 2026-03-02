@@ -731,7 +731,57 @@ def _get_file_type(self, file_path: str) -> tuple:
         return 1, "图片"      # fileType=1
 ```
 
-## 八、总结与展望
+## 八、一条提示词搞定项目复现
+
+**想不想自己也做一个？只需一条提示词！**
+
+我把整个项目的开发经验总结成了一个提示词文件，你可以直接发给 Claude Code，让它帮你从零开始完成这个项目。
+
+### 8.1 获取提示词
+
+```bash
+# 克隆项目
+git clone https://github.com/AIwork4me/smart-receipt-assistant.git
+
+# 查看提示词文件
+cat prompts/receipt-agent-prompt.md
+```
+
+### 8.2 使用方式
+
+把 `prompts/receipt-agent-prompt.md` 的内容发给 Claude Code，它会：
+
+1. **自动创建项目结构**
+2. **生成核心代码**（OCR、LLM、Web 模块）
+3. **避开所有坑**（API URL、fileType、印章位置等）
+4. **提供测试验证步骤**
+
+### 8.3 提示词包含的内容
+
+| 内容 | 说明 |
+|------|------|
+| 项目背景 | 痛点分析、目标定义 |
+| 技术栈选择 | PaddleOCR + LangChain + ERINE |
+| 项目结构 | 完整的目录和文件说明 |
+| 核心代码 | OCR、LLM、Web 模块的实现 |
+| **踩坑提醒** | API URL、fileType、印章位置、Gradio PDF 支持 |
+| 测试步骤 | 本地测试、功能验证 |
+| 部署指南 | ModelScope、GitHub |
+
+### 8.4 关键踩坑总结
+
+| 问题 | 解决方案 |
+|------|----------|
+| API Key 导入报错 | 延迟验证，`get_api_key()` 调用时才检查 |
+| PaddleOCR API 503 | 正确 URL: `q6mbb0r0t8m9q4pf.aistudio-app.com` |
+| fileType 参数错误 | **PDF=0, Image=1**（不是 PDF=2） |
+| 印章识别无结果 | 检查 `outputImages` 和 `markdown.images` 两个位置 |
+| gr.Image 不支持 PDF | 改用 `gr.File(file_types=[".pdf", ...])` |
+| ModelScope 分支问题 | 使用 `master` 分支，不是 `main` |
+
+---
+
+## 九、总结与展望
 
 ### 项目总结
 
@@ -746,11 +796,13 @@ def _get_file_type(self, file_path: str) -> tuple:
 - 支持 PDF 和图片格式自动检测
 - 统一的 AIStudio API Key 配置
 - Gradio Web 界面 + 样本发票一键体验
+- **一条提示词即可复现整个项目**
 
 ### 开源地址
 
 - **GitHub**：https://github.com/AIwork4me/smart-receipt-assistant
 - **在线体验**：https://modelscope.cn/studios/Devkit/reciept-agent
+- **项目提示词**：`prompts/receipt-agent-prompt.md`
 
 欢迎 Star 和 PR！
 
