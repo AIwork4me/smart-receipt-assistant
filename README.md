@@ -182,6 +182,18 @@ smart-receipt-assistant/
 
 ---
 
+## 📬 Contact / Follow Us
+
+<div align="center">
+
+Scan the QR code to follow us for more AI productivity hacks!
+
+![WeChat QR Code](assets/aiwork4me.jpg)
+
+</div>
+
+---
+
 ## 🙏 致谢
 
 - [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) - 百度飞桨 OCR 开源项目
