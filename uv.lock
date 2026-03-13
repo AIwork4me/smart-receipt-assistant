@@ -3333,10 +3333,11 @@ source = { editable = "." }
 dependencies = [
     { name = "gradio" },
     { name = "langchain" },
-    { name = "langchain-classic" },
     { name = "langchain-community" },
+    { name = "langchain-core" },
     { name = "langchain-openai" },
     { name = "langchain-paddleocr" },
+    { name = "langchain-text-splitters" },
     { name = "openai" },
     { name = "openpyxl" },
     { name = "pillow" },
@@ -3352,15 +3353,21 @@ dev = [
     { name = "pytest" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "gradio", specifier = ">=4.0.0" },
     { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "langchain", specifier = ">=0.1.0" },
-    { name = "langchain-classic", specifier = ">=1.0.2" },
     { name = "langchain-community", specifier = ">=0.0.1" },
+    { name = "langchain-core", specifier = ">=0.1.0" },
     { name = "langchain-openai", specifier = ">=0.1.0" },
     { name = "langchain-paddleocr", specifier = ">=0.1.0" },
+    { name = "langchain-text-splitters", specifier = ">=0.0.1" },
     { name = "openai", specifier = ">=1.0.0" },
     { name = "openpyxl", specifier = ">=3.1.0" },
     { name = "pillow", specifier = ">=10.0.0" },
@@ -3371,6 +3378,9 @@ requires-dist = [
     { name = "rich", specifier = ">=13.0.0" },
 ]
 provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=9.0.2" }]
 
 [[package]]
 name = "sniffio"

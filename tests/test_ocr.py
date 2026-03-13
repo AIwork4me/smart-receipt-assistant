@@ -111,23 +111,35 @@ class TestPaddleOCRVL:
 class TestOCRChain:
     """OCR Chain 测试"""
 
-    @patch("src.chains.ocr_chain.PaddleOCRVL")
-    def test_process(self, mock_ocr_class):
-        """测试处理流程"""
+    @patch("src.chains.ocr_chain.PaddleOCRVLLoader")
+    def test_process(self, mock_loader_class):
+        """测试处理流程 - 使用 langchain-paddleocr"""
         from src.chains.ocr_chain import OCRChain
 
-        mock_ocr = Mock()
-        mock_ocr.recognize.return_value = {
-            "layoutParsingResults": [
-                {"markdown": {"text": "测试文本"}}
-            ]
+        # 创建模拟的 Document 对象
+        mock_doc = MagicMock()
+        mock_doc.page_content = "发票代码：1234567890\n发票号码：12345678"
+        mock_doc.metadata = {
+            "paddleocr_vl_raw_response": {
+                "result": {
+                    "layoutParsingResults": [
+                        {
+                            "markdown": {"text": "发票代码：1234567890"},
+                            "outputImages": {}
+                        }
+                    ]
+                }
+            }
         }
-        mock_ocr.extract_text.return_value = "测试文本"
-        mock_ocr.extract_seals.return_value = []
-        mock_ocr_class.return_value = mock_ocr
 
-        chain = OCRChain("test_key")
+        # 设置 mock loader
+        mock_loader = MagicMock()
+        mock_loader.load.return_value = [mock_doc]
+        mock_loader_class.return_value = mock_loader
+
+        chain = OCRChain(api_key="test_key")
         result = chain.process("test.jpg")
 
-        assert result["text"] == "测试文本"
-        assert result["seals"] == []
+        assert "发票代码" in result["text"]
+        assert "seals" in result
+        assert "documents" in result

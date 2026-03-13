@@ -15,7 +15,19 @@ def setup_langchain_compat():
     为旧版 LangChain 导入路径创建兼容模块：
     - langchain.docstore.document -> langchain_core.documents
     - langchain.text_splitter -> langchain_text_splitters
+
+    注意：不会覆盖真实的 langchain 包，只是添加缺失的子模块。
     """
+    # 首先确保真实的 langchain 包被导入
+    try:
+        import langchain
+        # langchain 包已存在，不需要创建假的模块
+    except ImportError:
+        # 如果 langchain 包不存在，才创建假的模块
+        if 'langchain' not in sys.modules:
+            langchain_module = ModuleType('langchain')
+            sys.modules['langchain'] = langchain_module
+
     # 导入新版模块
     import langchain_core.documents
     import langchain_text_splitters
@@ -39,11 +51,6 @@ def setup_langchain_compat():
             if not attr.startswith('_'):
                 setattr(text_splitter_module, attr, getattr(langchain_text_splitters, attr))
         sys.modules['langchain.text_splitter'] = text_splitter_module
-
-    # 确保 langchain 模块存在
-    if 'langchain' not in sys.modules:
-        langchain_module = ModuleType('langchain')
-        sys.modules['langchain'] = langchain_module
 
 
 # 自动设置兼容层
