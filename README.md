@@ -63,7 +63,9 @@ Tool-based architecture with Agent support
 
 ## 🏗️ Architecture
 
-![Architecture](assets/arch.png)
+<div align="center">
+<img src="assets/arch.png" alt="Architecture" width="80%">
+</div>
 
 ---
 

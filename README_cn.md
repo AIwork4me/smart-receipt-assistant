@@ -63,7 +63,9 @@
 
 ## 🏗️ 技术架构
 
-![技术架构](assets/arch.png)
+<div align="center">
+<img src="assets/arch.png" alt="技术架构" width="80%">
+</div>
 
 ---
 
